@@ -1,3 +1,6 @@
+
+// 0 일때 digit 에서 while문 에 포함이 안되는거 조심
+
 #include <iostream>
 #include <stdlib.h>
 
@@ -18,6 +21,9 @@ void init(){
 }
 
 bool check(int n){
+    if(n==0){
+        return able[0];
+    }
     while (n>0){
         int rem = n%10;
         if(able[rem]){
@@ -30,6 +36,7 @@ bool check(int n){
 
 int digit(int n){
     int d=0;
+    if( n == 0) return 1;
     while(n>0){
         n=n/10;
         d++;
