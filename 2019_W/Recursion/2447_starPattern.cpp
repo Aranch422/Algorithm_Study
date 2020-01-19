@@ -32,14 +32,17 @@ string myPrint(int n,int part){
     }
 }
 
-void myPrint(int n){
-    cout<<myPrint(n,1)<<endl;
-    cout<<myPrint(n,2)<<endl;
-    cout<<myPrint(n,3)<<endl;
+string myPrint(int n){
+    return myPrint(n,1)+myPrint(n,2)+myPrint(n,3);
 }
 
 int main(){
     cin>>N;
-    myPrint(N);
+    string ret=myPrint(N);
+    cout<< ret.size()<<endl;
+    for(int i=0;i<ret.size();i++){
+        cout<<ret[i];
+        if(i%N==N-1) cout<<"\n";
+    }
     return 0;
 }
