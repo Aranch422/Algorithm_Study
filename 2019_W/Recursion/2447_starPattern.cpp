@@ -3,46 +3,46 @@
 
 using namespace std;
 
-int N;
+int n;
+char board[2200][2200];
 
-string myPrint(int n,int part){
-
-
-
-    if(part==0){
-        if(n==1) return " ";
-        else{
-            return myPrint(n/3,0)+myPrint(n/3,0)+myPrint(n/3,0);
+void draw(int r,int c, int level){
+    if(level ==3){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(i==1&&j==1) continue;
+                board[r+i][c+j]='*';
+            }
+        }
+        return;
+    }
+    level=level/3;
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(i==1&&j==1) continue;
+            draw(r+i*level,c+j*level,level);
         }
     }
-
-    if(part==1||part==3){
-        if(n==1) return "*";
-        if(n==3) return "***";
-        return myPrint(n/3,1)+myPrint(n/3,1)+myPrint(n/3,1)+
-        myPrint(n/3,2)+myPrint(n/3,2)+myPrint(n/3,2)+
-        myPrint(n/3,3)+myPrint(n/3,3)+myPrint(n/3,3);
-    }
-    if(part==2){
-        if(n==1) return "*";
-        if(n==3) return"* *";
-        return myPrint(n/3,1)+myPrint(n/3,0)+myPrint(n/3,1)+
-        myPrint(n/3,2)+myPrint(n/3,0)+myPrint(n/3,2)+
-        myPrint(n/3,3)+myPrint(n/3,0)+myPrint(n/3,3);
-    }
 }
 
-string myPrint(int n){
-    return myPrint(n,1)+myPrint(n,2)+myPrint(n,3);
-}
 
 int main(){
-    cin>>N;
-    string ret=myPrint(N);
-    cout<< ret.size()<<endl;
-    for(int i=0;i<ret.size();i++){
-        cout<<ret[i];
-        if(i%N==N-1) cout<<"\n";
+    ios_base::sync_with_stdio(false);
+    cout.tie(NULL);
+    cin.tie(NULL);
+    cin>>n;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            board[i][j]=' ';
+        }
+    }
+    draw(0,0,n);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cout<<board[i][j];
+        }
+        cout<<"\n";
     }
     return 0;
 }
+
