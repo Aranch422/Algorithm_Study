@@ -18,7 +18,7 @@ int main(){
             if(i==size-1) {
                 break;
             }
-            else if(s.find(s[i],i+1)==string::npos||i+1==s.find(s[i],i+1)){
+            else if(s.find(s[i],i+1)==string::npos||(i+1)==s.find(s[i],i+1)){
                 i++;
             } 
             else {
