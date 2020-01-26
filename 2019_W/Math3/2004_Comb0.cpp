@@ -2,23 +2,23 @@
 
 using namespace std;
 
-int n,m;
+long long n,m;
 
 void init(){
     cin>>n>>m;
 }
 
-pair<int,int> solveN(){
-    int ret2=0;
-    int ret5=0;
+pair<long long,long long> solveN(){
+    long long ret2=0;
+    long long ret5=0;
 
-    for(int i=2;i<=n;i*=2){
+    for(long long i=2;i<=n;i*=2){
         ret2+=m/i;
 
-        if(m%i>=n%i) ret2++;
+        if(m%i>n%i) ret2++;
 
     }
-    for(int i=5;i<=n;i*=5){
+    for(long long i=5;i<=n;i*=5){
         ret5+=m/i;
         if(m%i>n%i) ret5++;
 
@@ -27,13 +27,13 @@ pair<int,int> solveN(){
     return make_pair(ret2,ret5);
 }
 
-pair<int,int> solveM(){
-    int ret2=0;
-    int ret5=0;
-    for(int i=2;i<=m;i*=2){
+pair<long long,long long> solveM(){
+    long long ret2=0;
+    long long ret5=0;
+    for(long long i=2;i<=m;i*=2){
         ret2+=m/i;
     }
-    for(int i=5;i<m;i*=5){
+    for(long long i=5;i<=m;i*=5){
         ret5+=m/i;
     }
     return make_pair(ret2,ret5);
@@ -41,7 +41,7 @@ pair<int,int> solveM(){
 
 int main(){
     init();
-    pair<int,int> N,M,Ans;
+    pair<long long,long long> N,M,Ans;
 
     N=solveN();
     //cout<<N.first<<" "<<N.second<<endl;
