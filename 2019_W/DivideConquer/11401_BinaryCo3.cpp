@@ -14,5 +14,6 @@ long long nck(int a,int b){
     if(b==0) return 1;
     else{
         return nck(a-1,b-1)%R+nck(a-1,b)%R;
+        
     }
 }
