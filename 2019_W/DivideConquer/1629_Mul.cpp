@@ -12,7 +12,7 @@ void init(){
 
 long long power(long long n,long long m){
     if(m==0) return 1;
-    else if(m==1) return n;
+    else if(m==1) return n%c;
     else{
         if(m%2==0){
             return (power(n,m/2)%c)*(power(n,m/2)%c)%c;
