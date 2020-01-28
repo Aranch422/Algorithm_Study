@@ -6,7 +6,6 @@ using namespace std;
 int n,m;
 int num[500001];
 int target[500001];
-
 void init(){
     cin>>n;
     for(int i=0;i<n;i++){
@@ -19,36 +18,17 @@ void init(){
     }
 }
 
-int BS(int T,int left,int right){
-    if(left==right){
-        if(num[left]==T){
-            int cnt=1;
-            int temp=left+1;
-            while(num[temp]==T&&temp<n){
-                cnt++;
-                temp++;
-            }
-            temp==left-1;
-            while(num[temp]==T&&temp>=0){
-                cnt++;
-                temp--;
-            }
-            return cnt;
-        }
-        else return 0;
-    }
+int BS(int idx,int left,int right){
+    if(target[idx]<num[left]||num[right]<target[idx]) return 0;
+    if(target[idx]==num[left]&&target[idx]==num[right]) return right-left+1;
 
     int mid=(left+right)/2;
-    
-    if(T<=num[mid]){
-        return BS(T,left,mid);
-    }
-    else return BS(T,mid+1,right);
+    return BS(idx,left,mid)+BS(idx,mid+1,right);
 }
 
 void solve(){
     for(int i=0;i<m;i++){
-        cout<<BS(target[i],0,n-1)<<" ";
+        cout<<BS(i,0,n-1)<<" ";
     }
 }
 
