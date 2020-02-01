@@ -1,113 +1,145 @@
 #include <iostream>
 #include <stack>
 #include <math.h>
+#include <vector>
 
 using namespace std;
 
-int Heap[100001];
-
 int n;
-int Size=0;
+
+int HeapL[100001];
+int sizeL=0;
+int median;
+int HeapR[100001];
+int sizeR=0;
 
 void init(){
     cin>>n;
+    int num;
+    cin>>num;
+    median=num;
+    n--;
 }
 
-void insertH(int k){
-    Size++;
-    Heap[Size]=k;
-    int idx=Size;
+void insertL(int num){
+    sizeL++;
+    HeapL[sizeL]=num;
+    int idx=sizeL;
     while(idx/2>0){
         int parent=idx/2;
-        if(Heap[idx]<Heap[parent]){
-            int temp= Heap[idx];
-            Heap[idx]=Heap[parent];
-            Heap[parent]=temp;
+        if(HeapL[parent]<HeapL[idx]){
+            int temp = HeapL[parent];
+            HeapL[parent]=HeapL[idx];
+            HeapL[idx]=temp;
+            idx=parent;
         }
         else break;
-        idx=parent;
     }
 }
 
-int delH() {
-    int ret=Heap[1];
-    Heap[1]=Heap[Size];
-    Size--;
-    int idx=1;
-    while(idx*2<=Size){
+void insertR(int num){
+    sizeR++;
+    HeapR[sizeR]=num;
+    int idx=sizeR;
+    while(idx/2>0){
+        int parent=idx/2;
+        if(HeapR[parent]>HeapR[idx]){
+            int temp = HeapR[parent];
+            HeapR[parent]=HeapR[idx];
+            HeapR[idx]=temp;
+            idx=parent;
+        }
+        else break;
+    }
+}
 
+void deleteL(){
+    HeapL[1]=HeapL[sizeL];
+    sizeL--;
+    int idx=1;
+    while(idx*2<=sizeL){
         int left=idx*2;
         int right=idx*2+1;
-        //only left
-        if(right>Size){
-            if(Heap[left]<Heap[idx]){
-                int temp=Heap[left];
-                Heap[left]=Heap[idx];
-                Heap[idx]=temp;
-                idx=left;
+
+        //both children
+        if(right<=sizeL){
+
+            //left <right
+            if(HeapL[left]<HeapL[right]){
+                //parent<right
+                if(HeapL[idx]<HeapL[right]){
+                    int temp= HeapL[idx];
+                    HeapL[idx]=HeapL[right];
+                    HeapL[right]=temp;
+                    idx=right;
+                }
+                else break;
             }
-            else break;
-        }
-        //both
-        else{
-            if(Heap[left]<Heap[right]){
-                if(Heap[left]<Heap[idx]){
-                    int temp=Heap[left];
-                    Heap[left]=Heap[idx];
-                    Heap[idx]=temp;
+            else{
+                if(HeapL[idx]<HeapL[left]){
+                    int temp= HeapL[idx];
+                    HeapL[idx]=HeapL[left];
+                    HeapL[left]=temp;
                     idx=left;
                 }
-                else break;
+                else break;            
             }
-            else {
-                if(Heap[right]<Heap[idx]){
-                    int temp=Heap[right];
-                    Heap[right]=Heap[idx];
-                    Heap[idx]=temp;
-                    idx=right;  
-                }
-                else break;
-            }        
+        }
+
+        else{
+            if(HeapL[idx]<HeapL[left]){
+                int temp= HeapL[idx];
+                HeapL[idx]=HeapL[left];
+                HeapL[left]=temp;
+                idx=left;
+            }
+            else break;    
         }
     }
-    return ret;
 }
 
-void solve() {
-    for(int i=1;i<=n;i++){
-        stack<int> myS;
-        int num;
-        cin>>num;
-        insertH(num);
+void deleteR(){
+    HeapR[1]=HeapR[sizeR];
+    sizeR--;
+    int idx=1;
+    while(idx*2<=sizeR){
+        int left=idx*2;
+        int right=idx*2+1;
 
-        /*
-        cout<<"HEAP: ";
-        for(int j=1;j<=Size;j++){
-            cout<<Heap[j]<<" ";
-        }
-        cout<<endl;
-        */
+        //both children
+        if(right<=sizeR){
 
-        int mid;
-        if(i%2==1) mid=i/2+1;
-        else mid=i/2;
-        for(int j=1;j<=mid;j++){
-            myS.push(delH());
+            //left <right
+            if(HeapR[left]>HeapR[right]){
+                //parent<right
+                if(HeapR[idx]>HeapR[right]){
+                    int temp= HeapR[idx];
+                    HeapR[idx]=HeapR[right];
+                    HeapR[right]=temp;
+                    idx=right;
+                }
+                else break;
+            }
+            else{
+                if(HeapR[idx]>HeapR[left]){
+                    int temp= HeapR[idx];
+                    HeapR[idx]=HeapR[left];
+                    HeapR[left]=temp;
+                    idx=left;
+                }
+                else break;            
+            }
         }
-        //result
-        cout<<myS.top()<<"\n";
 
-        for(int j=1;j<=mid;j++){
-            insertH(myS.top());
-            myS.pop();
+        else{
+            if(HeapR[idx]>HeapR[left]){
+                int temp= HeapR[idx];
+                HeapR[idx]=HeapR[left];
+                HeapR[left]=temp;
+                idx=left;
+            }
+            else break;    
         }
-        /*
-        cout<<"HEAP2: ";
-        for(int j=1;j<=Size;j++){
-            cout<<Heap[j]<<" ";
-        }
-        cout<<endl;
-        */
     }
 }
 
@@ -116,6 +148,39 @@ int main(){
     cin.tie(NULL);
     cout.tie(NULL);
     init();
-    solve();
+    while(n>0){
+        //output check
+        /*
+        cout<<"HEAP L: ";
+        for(int i=1;i<=sizeL;i++){
+            cout<<HeapL[i]<<" ";
+        }
+        cout<<"\nMedian: "<<median<<"\nHEAP R: ";
+        for(int i=1;i<=sizeR;i++){
+            cout<<HeapR[i]<<" ";
+        }
+        cout<<endl;
+        */
+        cout<<median<<"\n";
+        n--;
+        int num;
+        cin>>num;
+        if(num<median){
+            insertL(num);
+        }
+        else insertR(num);
+
+        if(sizeR-sizeL>1){
+            insertL(median);
+            median=HeapR[1];
+            deleteR();
+        }
+        else if(sizeL-sizeR>=1){
+            insertR(median);
+            median=HeapL[1];
+            deleteL();
+        }
+    }
+    cout<<median<<"\n";
     return 0;
 }
