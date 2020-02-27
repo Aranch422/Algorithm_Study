@@ -14,16 +14,21 @@ void init(){
 }
 
 void solve(){
-    while(true){
+    while(!Q.empty()){
         pair<int,int> temp=Q.front();
+        cout<<temp.first<<endl;
         if(temp.first==y) {
             cout<<temp.second;
             return;
         }
         else{
+            if(temp.first>=2*y) {
+                Q.pop();
+                continue;
+            }
             Q.push(make_pair(temp.first+1,temp.second+1));
             Q.push(make_pair(temp.first-1,temp.second+1));
-            if(y>temp.first)Q.push(make_pair(temp.first*2,temp.second+1));
+            Q.push(make_pair(temp.first*2,temp.second+1));
         }
         Q.pop();
     }
