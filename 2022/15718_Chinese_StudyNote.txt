@@ -1,0 +1,16 @@
+100007 은 97 * 1031 둘 다 소수
+
+그래서 중국인의 나머지 정리 활용 가능
+https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B5%AD%EC%9D%B8%EC%9D%98_%EB%82%98%EB%A8%B8%EC%A7%80_%EC%A0%95%EB%A6%AC
+
+M-1 C N-2 를 구해야함 - 더럽게 큼
+
+뤼카(LUCAS)의 정리 활용
+https://ko.wikipedia.org/wiki/%EB%A4%BC%EC%B9%B4%EC%9D%98_%EC%A0%95%EB%A6%AC
+
+그래도 작은 수의 combination은 계산이 필요
+
+나눗셈의 모듈러 = 곱셉의 역원의 곱을 구하면 됨
+
+곱셈의 역원 -> 유클리드 호제법 확장으로 구할 수 있음
+https://www.crocus.co.kr/1232
