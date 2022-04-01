@@ -7,6 +7,8 @@ long long n;
 vector<long long> prime;
 vector<long long> primeSum;
 
+bool isPrime[4000001];
+
 long long biSearch(long long left, long long right, long long target){
 	long long mid = (left + right)/2;
 	if(left == right){
@@ -26,26 +28,28 @@ long long biSearch(long long left, long long right, long long target){
 int main(){
 	cin>>n;
 	long long sum = 0;
-	bool isPrime = true;
+	for(long long i=0;i<=n;i++){
+		isPrime[i]=true;
+	}
+	isPrime[0]=false;
+	isPrime[1]=false;
+	
 	for(long long i=2;i<=n;i++){
-		for(long long j=2;j*j<=i;j++){
-			if(i%j==0){
-				isPrime=false;
-				break;
-			}
+		if(isPrime[i] == false) continue;
+		for(long long j=i*2;j<=n;j+=i){
+			isPrime[j]=false;
 		}
-		if(isPrime){
-			sum +=i;
+	}
+	for(long long i=0;i<=n;i++){
+		if(isPrime[i]){
 			prime.push_back(i);
+			sum = sum +i;
 			primeSum.push_back(sum);
 		}
-		isPrime = true;
 	}
-	
 	long long answer = 0;
 	
 	long long len = prime.size();
-	
 	if(n == 1){
 		cout<<0;
 		return 0;
