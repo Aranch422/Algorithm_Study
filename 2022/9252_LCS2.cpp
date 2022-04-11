@@ -1,55 +1,43 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-bool isExist[1000][26];
-
 int main(){
-	string s1,s2;
-	cin>>s1>>s2;
-	for(int i=0;i<s2.size();i++){
-		for(int j=0;j<26;j++) isExist[i][j]=false;
-	}
-	for(int i=0;i<s2.size();i++){
-		for(int j=i-1;j>=0;j--){
-			isExist[j][int(s2[i])-65]=true;
-		}
-	}	
-	int maxLen = 0;
-	string Log = "";
-	for(int i=0;i<s1.size();i++){
-		int num = int(s1[i])-65;
-		int len;
-		string temp;
-		for(int j=0;j<s2.size();j++){
-			if(isExist[j][num]){
-				len=0;
-				temp="";
-				len++;
-				temp+=s1[i];
-				for(int k=i+1;k<s1.size();k++){
-					
-					if(isExist[j][int(s1[k])-65]){
-						cout<<k<<" "<<s1[k]<<endl;
-						len++;
-						temp+=s1[k];
+	string str1, str2;
+	int size=0;
+	string ans = "";
+	cin>>str1>>str2;
+	for(int i=0;i<str1.size();i++){
+		for(int j=0;j<str2.size();j++){
+			if(str1[i] == str2[j]){
+				int tempSize = 1;
+				string tempStr = "";
+				tempStr = str1[i];
+				string tempAns = tempStr;
+				int j2Start = j+1;
+				for(int i2=i+1;i2<str1.size();i2++){
+					for(int j2=j2Start;j2<str2.size();j2++){
+						if(str1[i2]==str2[j2]){
+							tempSize++;
+							tempAns += str1[i2];
+							j2Start = j2+1;
+							break;
+						}
 					}
 				}
-			}
-			if(maxLen<len){
-				maxLen = len;
-				Log = temp;
+				if(size<tempSize){
+					size = tempSize;
+					ans = tempAns;
+				}
 			}
 		}
 	}
-	cout<<Log;
-	cout<<endl;
-	for(int i=0;i<s2.size();i++){
-		for(int j=0;j<26;j++){
-			cout<<isExist[i][j]<<" ";
-		}
-		cout<<endl;
+	cout<<size<<endl;
+	if(size!=0){
+		cout<<ans;
 	}
+	
 	return 0;
-} 
+}
