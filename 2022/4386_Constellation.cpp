@@ -67,13 +67,12 @@ int main(){
 	while(visitCnt<n){
 		int end = dist.top().end;
 		double cost = dist.top().cost;
-		/*
+		
 		while(isVisit[end]){
 			end = dist.top().end;
 			cost = dist.top().cost;
 			dist.pop();
 		}
-		*/
 		dist.pop();
 		isVisit[end] = true;
 		answer += cost;
