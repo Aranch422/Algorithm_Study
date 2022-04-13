@@ -55,6 +55,10 @@ vector<edge> E;
 int main(){
 	cout<<fixed;
 	cout.precision(2);
+	edge E1 = edge(1,1,2);
+	edge E2 = edge(1,1,3);
+	cout<<(E1<E2);
+	return 0;
 	cin>>n>>m;
 	for(long long i=0;i<=n;i++){
 		parent[i] = -1;
