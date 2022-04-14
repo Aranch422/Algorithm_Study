@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -58,7 +59,6 @@ int getIndSet(node* root,bool isInvolved){
 			int bigger;
 			if(not_inVolved<inVolved){
 				bigger = inVolved;
-				Log.insert(root->children[i]->num);
 			}
 			else{
 				bigger = not_inVolved;
@@ -70,6 +70,7 @@ int getIndSet(node* root,bool isInvolved){
 	}
 }
 
+queue<int> myQ;
 
 int main(){
 	cin>>n;
@@ -93,22 +94,36 @@ int main(){
 	leveling(NULL,Nodes[1]);
 	
 	int a = getIndSet(Nodes[1],true);
-	set<int> LogA = Log;
-	Log.clear();
 	int b = getIndSet(Nodes[1],false);
-	set<int> LogB = Log;
 	int big;
 	if(a>b){
-		Log = LogA;
 		big = dp[1][1];
-		Log.insert(1);
 	}
 	else{
-		Log = LogB;
 		big = dp[1][0];
 	}
-	
 	cout<<big<<endl;
+	
+	myQ.push(1);
+
+	while(!myQ.empty()){
+		int i = myQ.front();
+		myQ.pop();
+		if(dp[i][0]<dp[i][1]){
+			Log.insert(i);
+			for(int j=0;j<Nodes[i]->children.size();j++){
+				node* child = Nodes[i]->children[j];
+				for(int k=0;k<child->children.size();k++){
+					myQ.push(child->children[k]->num);
+				}
+			}
+		}
+		else{
+			for(int j=0;j<Nodes[i]->children.size();j++){
+				myQ.push(Nodes[i]->children[j]->num);
+			}
+		}
+	}
 	
 	for(auto iter=Log.begin();iter!=Log.end();iter++){
 		if(iter == Log.begin()){
