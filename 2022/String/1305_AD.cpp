@@ -27,28 +27,11 @@ void makeFail(string str){
 
 int main(){
 	string str;
+	cin>>m;
+	cin>>str;
 
-	while(true){
-		cin>>str;
-		if(str==".") break;
-		m = str.size();
-		makeFail(str);
-		int idx = -1;
-		idx = m - fail[m-1];
-		if( idx == m){
-
-		}
-		else {
-			bool isAnswer = true;
-			if(m%idx!=0) {
-				isAnswer=false;
-			}
-			if(isAnswer){
-				cout<<m/idx<<endl;
-				continue;
-			}
-		}
-		cout<<1<<endl;
-	}
+	makeFail(str);
+	int idx = m-fail[m-1];
+	cout<<idx;
 	return 0;
 }
