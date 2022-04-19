@@ -18,7 +18,7 @@ int convertToIdx(char ch){
 	return int(ch)-97;
 }
 
-void insertTrie(node* now, string str, int strIdx){
+void insertTrie(node* now, string& str, int strIdx){
 	char ch = str[strIdx];
 	int idx = convertToIdx(ch);
 	bool isTerminal = (strIdx == str.size());
@@ -35,7 +35,7 @@ void insertTrie(node* now, string str, int strIdx){
 	}
 }
 
-bool findTrie(node* now, string str, int strIdx){
+bool findTrie(node* now, string& str, int strIdx){
 	char ch = str[strIdx];
 	int idx = convertToIdx(ch);
 	bool isTerminal = (strIdx == str.size());
