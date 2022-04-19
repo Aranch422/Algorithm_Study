@@ -6,7 +6,6 @@ using namespace std;
 
 
 int main(){
-    string str;
-	getline(cin,str);
-	cout<<str;
+	string str = "abc";
+    cout<<int(str[0]);
 }
