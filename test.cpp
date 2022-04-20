@@ -6,6 +6,6 @@ using namespace std;
 
 
 int main(){
-	string str = "abc";
-    cout<<int(str[0]);
+	string str = "123456789";
+    cout<<stoi(str.substr(0,0));
 }
