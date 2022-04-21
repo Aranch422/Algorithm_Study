@@ -1,11 +1,16 @@
 #include <iostream>
 #include <string>
+#include <set>
 
 using namespace std;
 
 
 
 int main(){
-	string str = "123456789";
-    cout<<stoi(str.substr(0,0));
+	set<int> a;
+	a.insert(1);
+	a.erase(a.find(1));
+	for(auto iter = a.begin();iter!=a.end();iter++){
+		cout<<*iter;
+	}
 }
