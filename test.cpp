@@ -1,16 +1,10 @@
 #include <iostream>
 #include <string>
 #include <set>
-
+#include <cmath>
 using namespace std;
 
-
-
 int main(){
-	set<int> a;
-	a.insert(1);
-	a.erase(a.find(1));
-	for(auto iter = a.begin();iter!=a.end();iter++){
-		cout<<*iter;
-	}
+	cout<<log(100000)/log(2)<<endl;
+	cout<<pow(2,17);
 }
