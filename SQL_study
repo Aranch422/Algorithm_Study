@@ -1,0 +1,22 @@
+문자열 쌍따옴표 안됨 - 아님 됨
+distinct, group by
+같은거 비교시 등호 한개
+나머지 연산시 mod 함수
+count 함수로 개수 셈 - count 안에 distinct 넣을 수 있음
+Length, limit, order by
+order by 여러개 할때 콤마로 구분
+like 문자열 패턴
+ex) name like 'a%';
+ex2) name like 'a%' or name like 'b%'; - 여러개 나올때 다 명시해줘야함
+
+regexp
+left(city,1) - 왼쪽 첫번째 in (a,e,i,o,u)
+
+if(cond, true면, false면)
+join 이면 일단 cartessian 이라고 생각하면 됨
+
+2일차
+Concat 써서 문자열 만들 수 있음 - 띄어쓰기 안됨
+그냥 select "Yes I am", name 하면 둘이 띄어쓰기 됨
+
+group by는 그룹짓고 그 그룹의 속성들을 뽑아내는거임
