@@ -20,3 +20,15 @@ Concat 써서 문자열 만들 수 있음 - 띄어쓰기 안됨
 그냥 select "Yes I am", name 하면 둘이 띄어쓰기 됨
 
 group by는 그룹짓고 그 그룹의 속성들을 뽑아내는거임
+
+3일차
+table 여러개에서도 뽑을 수 있음 
+테이블  alias 는 from emplyoee e, founder f 이렇게 하면됨
+ - 이게 cross join == cartesian product
+그룹짓고 속성 뽑아내는거라 그룹 속성이 아닌거 까지 그룹바이에 넣어야함
+
+조인 여러개는 그냥 계속 쓰면 됨
+row_number() = 로우에 번호 붙여줌 그래서 order by 무조건 있어야함
+ - row_number() over(뭐시기 뭐시기 oreder by 뭐시기)
+ 
+ group by 는 속성밖에 못뽑아내지만 partition by 는 다른 행들이 안사라짐
